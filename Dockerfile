@@ -8,7 +8,7 @@ ENV READINESS_CHECK_PATH=/health
 WORKDIR /app
 
 ENV PORT=8787
-ENV ABRG_DATADIR=/abgrdata
+ENV ABRG_DATADIR=/abrgdata
 
 COPY package.json /app/package.json
 COPY package-lock.json /app/package-lock.json
