@@ -18,13 +18,18 @@ app.get('/health', async c => {
 type GeocoderOptions = {
   fuzzy: string;
 };
+
+let geocoder: StreamGeocoder | null = null;
 const getGeocoder = async ({ fuzzy }: GeocoderOptions) => {
+  if (geocoder) {
+    return geocoder;
+  }
   const container = await setupContainer({
     dataDir: process.env.ABRG_DATADIR!,
     ckanId: 'ba000001', // リポジトリながめても他の値がなかったのでおそらく固定値
   });
   const db: Database = await container.resolve(DI_TOKEN.DATABASE);
-  const geocoder = StreamGeocoder.create(db, fuzzy);
+  geocoder = await StreamGeocoder.create(db, fuzzy);
   return geocoder;
 };
 
