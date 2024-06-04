@@ -19,17 +19,13 @@ type GeocoderOptions = {
   fuzzy: string;
 };
 
-let geocoder: StreamGeocoder | null = null;
 const getGeocoder = async ({ fuzzy }: GeocoderOptions) => {
-  if (geocoder) {
-    return geocoder;
-  }
   const container = await setupContainer({
     dataDir: process.env.ABRG_DATADIR!,
     ckanId: 'ba000001', // リポジトリながめても他の値がなかったのでおそらく固定値
   });
   const db: Database = await container.resolve(DI_TOKEN.DATABASE);
-  geocoder = await StreamGeocoder.create(db, fuzzy);
+  const geocoder = await StreamGeocoder.create(db, fuzzy);
   return geocoder;
 };
 
@@ -49,6 +45,10 @@ app.get('/geocode', async c => {
   for await (const res of readable.pipe(geocoder)) {
     result = res;
   }
+
+  // close streams
+  readable.destroy();
+  geocoder.destroy();
 
   return c.json({ result });
 });
