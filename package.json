@@ -19,7 +19,7 @@
     "abrg": "build/cli/cli.js"
   },
   "scripts": {
-    "server": "ABGR_DATADIR=/Users/kanahiro/.abgr-geocoder tsx watch src/server/index.ts",
+    "server": "ABRG_DATADIR=/Users/kanahiro/.abr-geocoder tsx watch src/server/index.ts",
     "start": "ts-node src/cli/cli.ts",
     "build": "tspc -p tsconfig.build.json",
     "test": "jest --maxWorker=25%",
