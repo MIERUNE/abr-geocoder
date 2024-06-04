@@ -1,3 +1,39 @@
+# abrg-server
+
+- Forked from digital-go-jp/abr-geocoder
+- Appended server code and dockerize
+
+## how to use
+
+```sh
+npm install
+npm run build
+ABRG_DATADIR=path/to/abrg-data  node build/server/index.js # listen on 8787
+
+curl http://localhost:8787/geocode?q=東京都千代田区紀尾井町1-3
+{
+  "result": {
+    "input": "東京都千代田区紀尾井町1-3",
+    "output": "東京都千代田区紀尾井町1-3",
+    "match_level": 8,
+    "lat": 35.679107172,
+    "lon": 139.736394597,
+    "other": "",
+    "prefecture": "東京都",
+    "city": "千代田区",
+    "town": "紀尾井町",
+    "town_id": "0056000",
+    "lg_code": "131016",
+    "block": "1",
+    "block_id": "001",
+    "addr1": "3",
+    "addr1_id": "003",
+    "addr2": "",
+    "addr2_id": ""
+  }
+}
+```
+
 # abr-geocoder
 
 [日本語 (Japanese)](./README.ja.md)
