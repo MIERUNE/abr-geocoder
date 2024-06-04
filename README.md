@@ -34,6 +34,13 @@ curl http://localhost:8787/geocode?q=東京都千代田区紀尾井町1-3
 }
 ```
 
+or you can use Container Image
+
+```sh
+docker build . -t abrg-server
+docker run -p 8787:8787 abrg-server
+```
+
 # abr-geocoder
 
 [日本語 (Japanese)](./README.ja.md)
