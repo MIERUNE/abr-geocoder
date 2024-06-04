@@ -19,12 +19,16 @@ type GeocoderOptions = {
   fuzzy: string;
 };
 
+let db: Database;
+
 const getGeocoder = async ({ fuzzy }: GeocoderOptions) => {
   const container = await setupContainer({
     dataDir: process.env.ABRG_DATADIR!,
     ckanId: 'ba000001', // リポジトリながめても他の値がなかったのでおそらく固定値
   });
-  const db: Database = await container.resolve(DI_TOKEN.DATABASE);
+
+  if (!db) db = await container.resolve(DI_TOKEN.DATABASE);
+
   const geocoder = await StreamGeocoder.create(db, fuzzy);
   return geocoder;
 };
