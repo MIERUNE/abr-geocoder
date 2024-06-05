@@ -10,7 +10,6 @@ WORKDIR /app
 ENV ABRG_DATADIR=/abrgdata
 
 COPY package.json /app/package.json
-COPY package-lock.json /app/package-lock.json
 COPY tsconfig.json /app/tsconfig.json
 COPY tsconfig.build.json /app/tsconfig.build.json
 COPY src /app/src
