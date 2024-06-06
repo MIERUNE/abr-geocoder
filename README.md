@@ -1,13 +1,14 @@
 # abrg-server
 
 - Forked from digital-go-jp/abr-geocoder
-- Appended server code and dockerize
+- Appended server code and dockerized
 
 ## how to use
 
 ```sh
 npm install
 npm run build
+node build/cli/cli.js download --dataDir path/to/abrg-data # takes about 500s
 ABRG_DATADIR=path/to/abrg-data  node build/server/index.js # listen on 8787
 
 curl http://localhost:8787/geocode?q=東京都千代田区紀尾井町1-3
@@ -37,7 +38,7 @@ curl http://localhost:8787/geocode?q=東京都千代田区紀尾井町1-3
 or you can use Container Image
 
 ```sh
-docker build . -t abrg-server
+docker build . -t abrg-server # takes about 500s
 docker run -p 8787:8787 abrg-server
 ```
 
