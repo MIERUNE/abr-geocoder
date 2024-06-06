@@ -1,4 +1,6 @@
 import { Readable } from 'stream';
+import path from 'path';
+import os from 'os';
 
 import { Hono } from 'hono';
 import { serve } from '@hono/node-server';
@@ -21,9 +23,14 @@ type GeocoderOptions = {
 
 let db: Database;
 
+function datadir() {
+  // fallback to default
+  return process.env.ABRG_DATADIR ?? path.join(os.homedir(), '.abr-geocoder');
+}
+
 const getGeocoder = async ({ fuzzy }: GeocoderOptions) => {
   const container = await setupContainer({
-    dataDir: process.env.ABRG_DATADIR!,
+    dataDir: datadir(),
     ckanId: 'ba000001', // https://catalog.registries.digital.go.jp/rc/dataset/ba000001
   });
 
